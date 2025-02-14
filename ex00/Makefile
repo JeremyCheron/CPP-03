@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CXX = g++
-CXXFLAGS = -Wall -Werror -Wextra -Iincludes -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -Iincludes -std=c++98 -g
 SRC_DIR = src
 OBJ_DIR = obj
 

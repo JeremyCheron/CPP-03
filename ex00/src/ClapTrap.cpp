@@ -10,12 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "../includes/ClapTrap.hpp"
 
 ClapTrap::ClapTrap():
 	_name("Default"),
 	_hitPoints(10),
-	_energyPoints(10)
+	_energyPoints(10),
+	_attackDamage(0)
 {
 	std::cout
 		<< "ClapTrap "
@@ -24,10 +25,11 @@ ClapTrap::ClapTrap():
 		<< std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name):
+ClapTrap::ClapTrap(const std::string& name):
 	_name(name),
 	_hitPoints(10),
-	_energyPoints(10)
+	_energyPoints(10),
+	_attackDamage(0)
 {
 	std::cout
 		<< "ClapTrap"
@@ -62,8 +64,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 	return *this;
 }
 
-void	ClapTrap::attack(std::string const &target)
-{
+void	ClapTrap::attack(const std::string &target) const {
 	if (this->_energyPoints <= 0 && this->_hitPoints <= 0)
 	{
 		std::cout
@@ -106,4 +107,15 @@ void	ClapTrap::takeDamage(unsigned int amount)
 		<< " Hit Points left, be careful !"
 		<<std::endl;
 }
-void	beRepaired(unsigned int amount);
+
+void ClapTrap::beRepaired(unsigned int amount) {
+	this->_hitPoints += amount;
+	std::cout
+		<< "ClapTrap "
+	<< this->_name
+	<< " has repaired "
+	<< amount
+	<< " Hit Points! New Total = "
+	<< this->_hitPoints
+	<< std::endl;
+}
