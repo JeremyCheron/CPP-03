@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:49:29 by jcheron           #+#    #+#             */
-/*   Updated: 2025/02/14 13:34:16 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/02/24 09:15:33 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ int main() {
 	std::cout
 		<< "CL4PTR4P TEST"
 		<< std::endl;
+	std::cout
+		<< "============ ClapTrap ============"
+		<< std::endl;
 	ClapTrap a;
 	ClapTrap b("Toto");
 	b.attack("Another ClapTrap");
@@ -25,7 +28,16 @@ int main() {
 	a.takeDamage(5);
 	a.takeDamage(5);
 	b.takeDamage(5);
+	b.beRepaired(5);
+	b.beRepaired(5);
+	std::cout
+		<< "============ ScavTrap ============"
+		<< std::endl;
 	ScavTrap c;
 	c.attack("Another ScavTrap");
 	c.guardGate();
+	std::cout
+		<< "============ END ============"
+		<< std::endl;
+	return 0;
 }
