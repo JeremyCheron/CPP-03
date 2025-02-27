@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:49:29 by jcheron           #+#    #+#             */
-/*   Updated: 2025/02/24 09:15:46 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/02/27 09:24:49 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,23 @@
 
 int main() {
 	std::cout
-		<< "CL4PTR4P TEST"
-		<< std::endl;
-	std::cout
-		<< "============ ClapTrap ============"
+		<< "================= ClapTrap ================="
 		<< std::endl;
 	ClapTrap a;
+	a.displayClaptrap();
 	ClapTrap b("Toto");
+	b.displayClaptrap();
+	b.attack("Another ClapTrap");
+	b.beRepaired(5);
+	b.attack("Another ClapTrap");
+	b.attack("Another ClapTrap");
+	b.attack("Another ClapTrap");
+	b.attack("Another ClapTrap");
+	b.attack("Another ClapTrap");
+	b.attack("Another ClapTrap");
+	b.attack("Another ClapTrap");
+	b.attack("Another ClapTrap");
+	b.attack("Another ClapTrap");
 	b.attack("Another ClapTrap");
 	b.takeDamage(5);
 	b.takeDamage(5);
@@ -29,8 +39,10 @@ int main() {
 	b.takeDamage(5);
 	b.beRepaired(5);
 	b.beRepaired(5);
+	a.displayClaptrap();
+	b.displayClaptrap();
 	std::cout
-		<< "============ END ============"
+		<< "==================== END ===================="
 		<< std::endl;
 	return 0;
 }

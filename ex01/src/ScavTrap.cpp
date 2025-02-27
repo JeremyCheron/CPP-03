@@ -1,49 +1,109 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/25 12:51:38 by jcheron           #+#    #+#             */
+/*   Updated: 2025/02/27 09:55:32 by jcheron          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ScavTrap.hpp"
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-    this->_name = "Default";
-    this->_hitPoints = 100;
-    this->_energyPoints = 50;
-    this->_attackDamage = 20;
-    std::cout << "ScavTrap " << this->_name << " created! (Default Constructor)" << std::endl;
+	this->_name = "Default";
+	this->_hitPoints = 100;
+	this->_energyPoints = 50;
+	this->_attackDamage = 20;
+	std::cout
+		<< BLUE "ScavTrap "
+		<< this->_name
+		<< " created! (Default Constructor)" RESET
+		<< std::endl;
+}
+
+ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy)
+{
+	std::cout
+		<< BLUE "ScavTrap Copy Constructor" RESET
+		<< std::endl;
+	*this = copy;
+}
+
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+{
+	this->_name = name;
+	this->_hitPoints = 100;
+	this->_energyPoints = 50;
+	this->_attackDamage = 20;
+	std::cout
+		<< BLUE "ScavTrap "
+		<< this->_name
+		<< " created! (Named Constructor)" RESET
+		<< std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "Deconstructor for ScavTrap " << this->_name << std::endl;
+	std::cout
+	<< RED "Deconstructor for ScavTrap "
+	<< this->_name
+	<< RESET
+	<< std::endl;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &src)
 {
-    std::cout << "ScavTrap Assignation operator called" << std::endl;
-    this->_name = src._name;
-    this->_hitPoints = src._hitPoints;
-    this->_energyPoints = src._energyPoints;
-    this->_attackDamage = src._attackDamage;
-    return *this;
+	std::cout << BLUE "ScavTrap Assignation operator called" RESET << std::endl;
+	this->_name = src._name;
+	this->_hitPoints = src._hitPoints;
+	this->_energyPoints = src._energyPoints;
+	this->_attackDamage = src._attackDamage;
+	return *this;
 }
 
-void	ScavTrap::attack(const std::string &target)
+void ScavTrap::attack(const std::string &target)
 {
-    if (this->_energyPoints > 0 && this->_hitPoints > 0)
-    {
-        std::cout << "ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
-        this->_energyPoints--;
-    }
-    else if (this->_energyPoints == 0)
-        std::cout
-            << "\033[31mScavTrap "
-            << this->_name
-            << " is not able to attack "
-            << target
-            << ", because he has no energy points left.\033[0m"
-            << std::endl;
-    else
-        std::cout << "\033[31mScavTrap " << this->_name << " is not able to attack " << target << ", because he has not enough hit points.\033[0m" << std::endl;
+	if (_hitPoints <= 0)
+	{
+		std::cout << RED "ScavTrap " << _name << " cannot attack, not enough HP!" RESET << std::endl;
+		return;
+	}
+	if (_energyPoints <= 0)
+	{
+		std::cout << RED "ScavTrap " << _name << " has no energy left to attack!" RESET << std::endl;
+		return;
+	}
+	std::cout << GREEN "ScavTrap " << _name << " attacks " << target
+			  << ", causing " << _attackDamage << " points of damage!" RESET << std::endl;
+	_energyPoints--;
 }
 
 void	ScavTrap::guardGate()
 {
-  std::cout << "ScavTrap " << this->_name << " guards!" << std::endl;
+  std::cout
+  << YELLOW "ScavTrap "
+  << this->_name
+  << "'s Gate Keeper Mode ACTIVATED" RESET
+  << std::endl;
+}
+
+void	ScavTrap::displayScavtrap(void)
+{
+	const int	totalWidth = 43;
+	ClapTrap::printTitle(" ScavTrap ", 45);
+	printCentered(this->_name, totalWidth);
+	printCentered("HP: " + ClapTrap::toString(this->_hitPoints), totalWidth);
+	printCentered("Energy: " + ClapTrap::toString(this->_energyPoints), totalWidth);
+	printCentered("Attack Damage: " + ClapTrap::toString(this->_attackDamage), totalWidth);
+
+	std::cout
+		<< std::setw(45)
+		<< std::setfill('-')
+		<< ""
+		<< std::setfill(' ')
+		<< std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 12:49:27 by jcheron           #+#    #+#             */
-/*   Updated: 2025/02/24 09:14:20 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/02/27 09:49:23 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ ClapTrap::ClapTrap():
 	_attackDamage(0)
 {
 	std::cout
-		<< "ClapTrap "
+		<< GREEN "ClapTrap "
 		<< this->_name
-		<< " is born! (Default Construtor)"
+		<< " is born! (Default Construtor)" RESET
 		<< std::endl;
 }
 
@@ -32,16 +32,16 @@ ClapTrap::ClapTrap(const std::string& name):
 	_attackDamage(0)
 {
 	std::cout
-		<< "ClapTrap"
+		<< GREEN "ClapTrap "
 		<< _name
-		<<" is born! (Named Constructor)"
+		<<" is born! (Named Constructor)" RESET
 		<< std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src)
 {
 	std::cout
-		<< "ClapTrap Copy Constructor"
+		<< GREEN "ClapTrap Copy Constructor" RESET
 		<< std::endl;
 	*this = src;
 }
@@ -50,13 +50,15 @@ ClapTrap::~ClapTrap()
 {
 	std::cout
 		<< _name
-		<< " Died! (ClapTrap Deconstructor Called)"
+		<< RED " Died! (Deconstructor Called)" RESET
 		<<std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 {
-	std::cout << "ClapTrap Assignation operator called" << std::endl;
+	std::cout
+		<< GREEN "ClapTrap Assignation operator called" RESET
+		<< std::endl;
 	this->_name = src._name;
 	this->_hitPoints = src._hitPoints;
 	this->_energyPoints = src._energyPoints;
@@ -64,24 +66,28 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &src)
 	return *this;
 }
 
-void	ClapTrap::attack(const std::string &target) const {
-	if (this->_energyPoints <= 0 && this->_hitPoints <= 0)
+void	ClapTrap::attack(const std::string &target) {
+	if (this->_energyPoints <= 0 || this->_hitPoints <= 0)
 	{
 		std::cout
-			<< "ClapTrap "
+			<< RED "ClapTrap "
 			<< this->_name
-			<< " can't attack !";
+			<< " can't attack! (Energy to low)" RESET
+			<< std::endl;
 	}
 	else
 	{
+		this->_energyPoints--;
 		std::cout
-			<< "ClapTrap "
+			<< GREEN "ClapTrap "
 			<< this->_name
 			<< " attacks "
 			<< target
+			<< RESET
 			<< std::endl;
 	}
 }
+
 void	ClapTrap::takeDamage(unsigned int amount)
 {
 	if (this->_hitPoints > amount)
@@ -91,31 +97,99 @@ void	ClapTrap::takeDamage(unsigned int amount)
 	else
 	{
 		std::cout
-			<< "ClapTrap "
+			<< RED "ClapTrap "
 			<< this->_name
-			<< " is already dead!"
+			<< " is already dead!" RESET
 			<< std::endl;
 		return;
 	}
 	std::cout
-		<< "ClapTrap "
+		<< RED "ClapTrap "
 		<< this->_name
 		<< " took "
 		<< amount
-		<< "damage! "
-		<< this->_hitPoints
-		<< " Hit Points left, be careful !"
-		<<std::endl;
+		<< "damage!";
+	if (this->_hitPoints == 0)
+		std::cout
+			<< " He's dead!" RESET
+			<< std::endl;
+	else
+		std::cout
+			<< this->_hitPoints
+			<< " Hit Points left, be careful !" RESET
+			<<std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-	this->_hitPoints += amount;
+	if (this->_energyPoints == 0)
+	{
+		std::cout
+			<< RED "ClapTrap "
+			<< this->_name
+			<< " can't repair! (energy to low)" RESET
+			<< std::endl;
+	}
+	else
+	{
+		this->_hitPoints += amount;
+		std::cout
+			<< YELLOW "ClapTrap "
+			<< this->_name
+			<< " has repaired "
+			<< amount
+			<< " Hit Points! New Total = "
+			<< this->_hitPoints
+			<< RESET
+			<< std::endl;
+	}
+}
+
+void	ClapTrap::printCentered(std::string text, int width)
+{
+	int	textLength = text.length();
+	int	padding = (width - textLength) / 2;
 	std::cout
-		<< "ClapTrap "
-	<< this->_name
-	<< " has repaired "
-	<< amount
-	<< " Hit Points! New Total = "
-	<< this->_hitPoints
-	<< std::endl;
+		<< "|"
+		<< std::setw(padding) << " "
+		<< text
+		<< std::setw(width - textLength - padding) << " "
+		<< "|"
+		<< std::endl;
+}
+
+std::string ClapTrap::toString(unsigned int value)
+{
+	std::ostringstream oss;
+	oss << value;
+	return oss.str();
+}
+
+void ClapTrap::printTitle(const std::string className, int totalWidth)
+{
+	int	classPadding = (totalWidth - className.length()) / 2;
+
+	std::cout
+		<< std::setfill('-')
+		<< std::setw(classPadding) << ""
+		<< className
+		<< std::setw(totalWidth - classPadding - className.length()) << ""
+		<< std::setfill(' ')
+		<< std::endl;
+}
+
+void	ClapTrap::displayClaptrap(void)
+{
+	const int	totalWidth = 43;
+	printTitle(" ClapTrap ", 45);
+	printCentered(this->_name, totalWidth);
+	printCentered("HP: " + toString(this->_hitPoints), totalWidth);
+	printCentered("Energy: " + toString(this->_energyPoints), totalWidth);
+	printCentered("Attack Damage: " + toString(this->_attackDamage), totalWidth);
+
+	std::cout
+		<< std::setw(45)
+		<< std::setfill('-')
+		<< ""
+		<< std::setfill(' ')
+		<< std::endl;
 }

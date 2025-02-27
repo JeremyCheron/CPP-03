@@ -6,7 +6,7 @@
 #    By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/14 12:49:33 by jcheron           #+#    #+#              #
-#    Updated: 2025/02/14 13:07:01 by jcheron          ###   ########.fr        #
+#    Updated: 2025/02/27 09:22:55 by jcheron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_DIR = obj
 SRC = $(SRC_DIR)/main.cpp $(SRC_DIR)/ClapTrap.cpp
 OBJ = $(OBJ_DIR)/main.o $(OBJ_DIR)/ClapTrap.o
 
-NAME = ex00
+NAME = Aaaaand_OPEN
 
 all: $(NAME)
 
