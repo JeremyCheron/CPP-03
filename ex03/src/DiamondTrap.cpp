@@ -6,19 +6,19 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 11:11:18 by jcheron           #+#    #+#             */
-/*   Updated: 2025/02/27 11:58:14 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:07:43 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap():
-	ClapTrap("Default_clap_name"), ScavTrap(), FragTrap()
+	ClapTrap(), ScavTrap(), FragTrap()
 {
 	this->_name = "Default";
-	this->_hitPoints = FragTrap::_hitPoints;
-	this->_energyPoints = ScavTrap::_energyPoints;
-	this->_attackDamage = FragTrap::_attackDamage;
+	this->_hitPoints = FragTrap::_hitPointsConst;
+	this->_energyPoints = ScavTrap::_energyPointsConst;
+	this->_attackDamage = FragTrap::_attackDamageConst;
 	this->ClapTrap::_name = this->_name + "_clap_name";
 	std::cout
 		<< CYAN "DiamondTrap "
@@ -41,9 +41,9 @@ DiamondTrap::DiamondTrap(std::string name):
 {
 	this->_name = name;
 	this->ClapTrap::_name = name + "_clap_name";
-	this->_hitPoints = FragTrap::_hitPoints;
-	this->_energyPoints = ScavTrap::_energyPoints;
-	this->_attackDamage = FragTrap::_attackDamage;
+	this->_hitPoints = FragTrap::_hitPointsConst;
+	this->_energyPoints = ScavTrap::_energyPointsConst;
+	this->_attackDamage = FragTrap::_attackDamageConst;
 	std::cout
 		<< CYAN "DiamondTrap "
 		<< this->_name

@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:51:38 by jcheron           #+#    #+#             */
-/*   Updated: 2025/02/27 10:53:58 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:06:02 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 ScavTrap::ScavTrap() : ClapTrap()
 {
 	this->_name = "Default";
-	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->_hitPoints = _hitPointsConst;
+	this->_energyPoints = _energyPointsConst;
+	this->_attackDamage = _attackDamageConst;
 	std::cout
 		<< BLUE "ScavTrap "
 		<< this->_name
@@ -36,9 +36,9 @@ ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy)
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	this->_name = name;
-	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->_hitPoints = _hitPointsConst;
+	this->_energyPoints = _energyPointsConst;
+	this->_attackDamage = _attackDamageConst;
 	std::cout
 		<< BLUE "ScavTrap "
 		<< this->_name
@@ -106,4 +106,13 @@ void	ScavTrap::displayScavtrap(void)
 		<< ""
 		<< std::setfill(' ')
 		<< std::endl;
+}
+
+int ScavTrap::getEnergyPoints(void) const
+{
+	std::cout
+		<< "ScavTrap Energy Points: "
+		<< this->_energyPoints
+		<< std::endl;
+	return this->_energyPoints;
 }

@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:04:51 by jcheron           #+#    #+#             */
-/*   Updated: 2025/02/27 11:24:18 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:05:11 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ class FragTrap: virtual public ClapTrap
 {
 
 private:
+
+protected:
+	const static int _hitPointsConst = 100;
+	const static int _energyPointsConst = 100;
+	const static int _attackDamageConst = 30;
 
 public:
 	// Constructors
@@ -35,7 +40,8 @@ public:
 	void displayFragtrap(void);
 	void highFivesGuys(void);
 	// Getter
-
+	int	getHitPoints(void) const;
+	int getAttackDamage(void) const;
 	// Setter
 
 };

@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 09:04:03 by jcheron           #+#    #+#             */
-/*   Updated: 2025/02/27 11:53:52 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:06:37 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 FragTrap::FragTrap() : ClapTrap()
 {
 	this->_name = "Default";
-	this->_hitPoints = 100;
-	this->_energyPoints = 100;
-	this->_attackDamage = 30;
+	this->_hitPoints = _hitPointsConst;
+	this->_energyPoints = _energyPointsConst;
+	this->_attackDamage = _attackDamageConst;
 	std::cout
 	<< MAGENTA "FragTrap "
 	<< this->_name
@@ -36,9 +36,9 @@ FragTrap::FragTrap(const FragTrap &copy) : ClapTrap(copy)
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	this->_name = name;
-	this->_hitPoints = 100;
-	this->_energyPoints = 100;
-	this->_attackDamage = 30;
+	this->_hitPoints = _hitPointsConst;
+	this->_energyPoints = _energyPointsConst;
+	this->_attackDamage = _attackDamageConst;
 	std::cout
 		<< MAGENTA "FragTrap "
 		<< this->_name
@@ -124,4 +124,14 @@ void	FragTrap::displayFragtrap(void)
 		<< ""
 		<< std::setfill(' ')
 		<< std::endl;
+}
+
+int	FragTrap::getHitPoints(void) const
+{
+	return this->_hitPoints;
+}
+
+int	FragTrap::getAttackDamage(void) const
+{
+	return this->_attackDamage;
 }

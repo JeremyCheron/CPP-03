@@ -6,7 +6,7 @@
 /*   By: jcheron <jcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 09:48:27 by jcheron           #+#    #+#             */
-/*   Updated: 2025/02/27 11:24:22 by jcheron          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:05:17 by jcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ class ScavTrap: virtual public ClapTrap
 
 private:
 	bool _guarding_gate;
+
+protected:
+	const static int _hitPointsConst = 100;
+	const static int _energyPointsConst = 50;
+	const static int _attackDamageConst = 20;
 public:
 	// Constructors
 	ScavTrap();
@@ -35,7 +40,7 @@ public:
 	void guardGate();
 	void displayScavtrap(void);
 	// Getter
-
+	int getEnergyPoints(void) const;
 	// Setter
 
 };
